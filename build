@@ -1,0 +1,20 @@
+#!/bin/bash
+
+failed () {
+	echo -e '\n  \e[1;31mfailed '$@'\e[0m\n' >&2
+	false
+}
+
+test -f daniela.mjs || {
+	failed to locate the daniela format tool
+	exit 1
+}
+
+npx -q sass styles.scss | minify --type css -o dist/daniela.min.css \
+|| failed to transpile styles.scss
+
+npx -q tsc --build && {
+	node daniela.mjs index.js -u | minify --type js -o dist/daniela.min.js
+	node daniela.mjs index.js -k > index.temp.js && \
+	rm index.js && mv index.temp.js index.js
+} || failed to transpile index.ts
