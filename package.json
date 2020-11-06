@@ -1,0 +1,21 @@
+{
+	"name": "daniela",
+	"author": "onerbs",
+	"version": "1.0.0",
+	"license": "MIT",
+	"main": "index.js",
+	"types": "index.d.ts",
+	"description": "Collection of customizable DOM dialogs",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/onerbs/daniela.git"
+	},
+	"bugs": {
+		"url": "https://github.com/onerbs/daniela/issues"
+	},
+	"homepage": "https://github.com/onerbs/daniela",
+	"devDependencies": {
+		"sass": "^1.29.0",
+		"typescript": "^4.0.5"
+	}
+}
