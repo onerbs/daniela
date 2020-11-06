@@ -1,0 +1,120 @@
+:root {
+	--daniela-background: #000;
+	--daniela-foreground: #EEE;
+	--daniela-z-dialog: 20;
+	--daniela-z-toast: 30;
+	--daniela-radii: 4pt;
+}
+
+%_normal {
+	background-color: var(--daniela-background);
+	color: var(--daniela-foreground);
+}
+
+%_inverted {
+	background-color: var(--daniela-foreground);
+	color: var(--daniela-background);
+}
+
+%_radii {
+	border-radius: var(--daniela-radii);
+}
+
+@mixin bordered($color) {
+	border: solid 1px $color;
+	outline-color: $color;
+}
+
+.__Dn_Overlay {
+	align-items: center;
+	display: flex;
+	height: 100vh;
+	justify-content: center;
+	user-select: none;
+	width: 100vw;
+	@extend %_normal;
+}
+
+.__Dn_Toast {
+	justify-content: center;
+	left: 0;
+	right: 0;
+	top: 15vh;
+	z-index: var(--daniela-z-toast);
+	p {
+		display: inline-block;
+		padding: 1rem 2rem;
+		width: fit-content;
+		@extend %_normal, %_radii;
+	}
+}
+
+.__Dn_Dialog {
+	flex-direction: column;
+	z-index: var(--daniela-z-dialog);
+	h1 {
+		margin-bottom: 1em;
+	}
+	input, button {
+		font-size: 14pt;
+		padding: .5em;
+		@extend %_radii;
+	}
+	input {
+		user-select: initial;
+		width: 300px;
+		@extend %_normal;
+		@include bordered(var(--daniela-foreground));
+		&.error {
+			@include bordered(crimson);
+		}
+		&:focus {
+			@include bordered(var(--daniela-background))
+		}
+	}
+	button {
+		border: none;
+		width: calc(300px / 2);
+		@extend %_inverted;
+	}
+	span {
+		display: grid;
+		grid-gap: 1rem;
+		grid-template-areas: 'D D';
+		margin: 1rem 0 20vh;
+	}
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0
+	}
+	to {
+		opacity: 1
+	}
+}
+
+@keyframes fadeOut {
+	from {
+		opacity: 1
+	}
+	to {
+		opacity: 0
+	}
+}
+
+.__Dn_fadeIn {
+	animation-name: fadeIn;
+}
+
+.__Dn_fadeOut {
+	animation-name: fadeOut;
+	opacity: 0;
+}
+
+.__Dn_Toast,
+.__Dn_Dialog {
+	animation-duration: .25s;
+	display: flex;
+	position: absolute;
+}
