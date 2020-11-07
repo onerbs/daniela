@@ -6,17 +6,17 @@
 	--daniela-radii: 4pt;
 }
 
-%_normal {
+%normal {
 	background-color: var(--daniela-background);
 	color: var(--daniela-foreground);
 }
 
-%_inverted {
+@mixin inverted {
 	background-color: var(--daniela-foreground);
 	color: var(--daniela-background);
 }
 
-%_radii {
+@mixin radii {
 	border-radius: var(--daniela-radii);
 }
 
@@ -32,7 +32,7 @@
 	justify-content: center;
 	user-select: none;
 	width: 100vw;
-	@extend %_normal;
+	@extend %normal;
 }
 
 .__Dn_Toast {
@@ -42,10 +42,11 @@
 	top: 15vh;
 	z-index: var(--daniela-z-toast);
 	p {
+		@include radii;
 		display: inline-block;
 		padding: 1rem 2rem;
 		width: fit-content;
-		@extend %_normal, %_radii;
+		@extend %normal;
 	}
 }
 
@@ -56,14 +57,14 @@
 		margin-bottom: 1em;
 	}
 	input, button {
+		@include radii;
 		font-size: 14pt;
 		padding: .5em;
-		@extend %_radii;
 	}
 	input {
 		user-select: initial;
 		width: 300px;
-		@extend %_normal;
+		@extend %normal;
 		@include bordered(var(--daniela-foreground));
 		&.error {
 			@include bordered(crimson);
@@ -75,7 +76,7 @@
 	button {
 		border: none;
 		width: calc(300px / 2);
-		@extend %_inverted;
+		@include inverted;
 	}
 	span {
 		display: grid;
