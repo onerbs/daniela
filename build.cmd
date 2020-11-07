@@ -13,7 +13,7 @@ IF %ERRORLEVEL% NEQ 0 (
 )
 
 IF NOT EXIST node_modules (
-	CALL npm install --save-dev || (
+	CALL npm install || (
 		SET verb=install
 		SET target=dependencies
 		GOTO failure

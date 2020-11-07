@@ -9,7 +9,7 @@ type npm > /dev/null || failed to locate the npm tool
 type npx > /dev/null || failed to locate the npx tool
 
 test -e node_modules || {
-	npm install -D || failed to install dependencies
+	npm install || failed to install dependencies
 }
 test -e dist && {
 	rm -rf dist && mkdir dist
