@@ -14,7 +14,7 @@ if (process.argv[2] === '-') {
 		chunks.push(chunk)
 	}
 	const source = Buffer.concat(chunks).toString('utf-8')
-	const { css } = csso.minify(source, {restructure: false})
+	const { css } = csso.minify(source, { restructure: false })
 	saveFileSync(css, 'css')
 	process.exit(1 - !!css)
 }

@@ -1,4 +1,4 @@
-build
+build*
 daniela.mjs
 tsconfig.json
 .editorconfig
