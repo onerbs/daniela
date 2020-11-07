@@ -5,14 +5,19 @@ failed () {
 	exit 1
 }
 
-type minify > /dev/null || failed to locate the minify tool
+type npm > /dev/null || failed to locate the npm tool
+type npx > /dev/null || failed to locate the npx tool
 
-npx -q sass styles.scss | \
-minify --type css -o dist/daniela.min.css || \
-failed to transpile styles.scss
+test -e node_modules || {
+	npm install -D || failed to install dependencies
+}
+test -e dist && {
+	rm -rf dist && mkdir dist
+}
 
-npx -q tsc --build && {
-	node daniela.mjs index.js | \
-	minify --type js -o dist/daniela.min.js || \
-	failed to process index.js
+npx sass styles.scss | node daniela.mjs - || \
+failed to transpile and minify styles.scss
+
+npx tsc --build && {
+	node daniela.mjs || failed to minify index.js
 } || failed to transpile index.ts
